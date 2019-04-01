@@ -1,5 +1,9 @@
 package com.hustava.practicaljava.rest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import com.hustava.practicaljava.rest.service.CarService;
 @RequestMapping("/api/car/v1")
 public class CarRestController {
 	Logger log = LoggerFactory.getLogger(CarRestController.class);
+	Random random = new Random();
 	
 	
 
@@ -35,4 +40,18 @@ public class CarRestController {
 		return car.toString();
 		
 	}
+	
+	@GetMapping(path = "/random-cars", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Car> randomCars() {
+		var result = new ArrayList<Car>();
+		
+		for (int i = 0 ; i < random.nextInt(6); i++) {
+			result.add(carService.generateCar());
+		}
+		
+		return result;
+	}
+	
+	
+	
 }

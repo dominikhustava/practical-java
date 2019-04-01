@@ -1,6 +1,7 @@
 package com.hustava.practicaljava.rest.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Car {
 	private String brand;
@@ -9,6 +10,7 @@ public class Car {
 	private int price;
 	private boolean available;
 	private Date firstReleaseDate;
+	private List<String> aditionalFeatures;
 	
 	
 	public Car() {}
@@ -30,6 +32,11 @@ public class Car {
 		this.firstReleaseDate = firstReleaseDate;
 	}
 
+
+	public List<String> getAditionalFeatures() {
+		return aditionalFeatures;
+	}
+
 	public String getBrand() {
 		return brand;
 	}
@@ -49,9 +56,13 @@ public class Car {
 	public String getType() {
 		return type;
 	}
-	
+
 	public boolean isAvailable() {
 		return available;
+	}
+	
+	public void setAditionalFeatures(List<String> aditionalFeatures) {
+		this.aditionalFeatures = aditionalFeatures;
 	}
 	public void setAvailable(boolean available) {
 		this.available = available;
@@ -74,7 +85,8 @@ public class Car {
 	@Override
 	public String toString() {
 		return "Car [brand=" + brand + ", color=" + color + ", type=" + type + ", price=" + price + ", available="
-				+ available + ", firstReleaseDate=" + firstReleaseDate + "]";
+				+ available + ", firstReleaseDate=" + firstReleaseDate + ", aditionalFeatures=" + aditionalFeatures
+				+ "]";
 	}
 	
 	
