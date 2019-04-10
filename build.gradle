@@ -1,3 +1,4 @@
+
 plugins {
 	id 'org.springframework.boot' version '2.1.3.RELEASE'
 	id 'java'
@@ -19,14 +20,17 @@ repositories {
 ext{
 	commonsLang3Version = '3.8.1';
 	//devTools = '2.1.3';
+	elasticSearchVersion = '6.2.2'
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
 	//compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
-	compile "org.apache.commons:commons-lang3:${commonsLang3Version}"
+	compile "org.apache.commons:commons-lang3:${commonsLang3Version}",
+		"org.elasticsearch.client:transport:${elasticSearchVersion}"
 	
 	//compileOnly("org.springframework.boot:spring-boot-devtools")//check buil gradle plugins - not working
 	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.1.3.RELEASE'

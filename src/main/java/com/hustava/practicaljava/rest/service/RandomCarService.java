@@ -6,6 +6,8 @@ import java.util.Random;
 import org.springframework.stereotype.Service;
 
 import com.hustava.practicaljava.rest.domain.Car;
+import com.hustava.practicaljava.rest.domain.Engine;
+import com.hustava.practicaljava.rest.domain.Tire;
 import com.hustava.practicaljava.rest.util.RandomDateUtil;
 
 @Service
@@ -26,15 +28,33 @@ public class RandomCarService implements CarService {
 		car.setFirstReleaseDate(RandomDateUtil.generateRandomDate());
 		
 		var randomCount = random.nextInt(ADDITIONAL_FEATURES.size());
-		var randomFeatures = new ArrayList<String>();
+		var additionalFeatures = new ArrayList<String>();
 		for (int i = 1; i <= randomCount; i++) {
-			randomFeatures.add(ADDITIONAL_FEATURES.get(i-1));
+			additionalFeatures.add(ADDITIONAL_FEATURES.get(i - 1));
 		}
-		if (!randomFeatures.isEmpty()) {
-			car.setAditionalFeatures(randomFeatures);
+		car.setAdditionalFeatures(additionalFeatures);
+
+		var randomFuelType = FUEL_TYPES.get(random.nextInt(FUEL_TYPES.size()));
+		var randomHorsepower = 100 + random.nextInt(121);
+		var randomEngine = new Engine(randomFuelType, randomHorsepower);
+		car.setEngine(randomEngine);
+
+		var randomCompatibleTires = new ArrayList<Tire>();
+		for (int i = 0; i < 3; i++) {
+			var tireManufacturer = TIRE_MANUFACTURERS.get(random.nextInt(TIRE_MANUFACTURERS.size()));
+			var tireSize = 15 + random.nextInt(3);
+			var tirePrice = 200 + random.nextInt(201);
+
+			var randomTire = new Tire(tireManufacturer, tireSize, tirePrice);
+			randomCompatibleTires.add(randomTire);
 		}
-		
-		
+
+		car.setCompatibleTires(randomCompatibleTires);
+
+		if (random.nextBoolean()) {
+			car.setSecretFeature("Can fly");
+		}
+
 		return car;
 	}
 
